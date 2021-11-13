@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Age Rol Predicter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
+</head>
+<body>
+    <div class="main-container container my-5">
+        <header class="px-2 px-md-0">
+            <h1>ML Age Rol Predicter</h1>
+            <h4><a href="/api?age=20">API</a></h4>
+        </header>
+        <section class="container details-section my-4 my-md-5 p-4">
+            <h2>Details</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>Language:</strong> Python
+                </li>
+                <li class="list-group-item">
+                    <strong>Algorithm:</strong> K Means Clustering
+                </li>
+                <li class="list-group-item"> 
+                    <strong>Training Samples:</strong> 63
+                </li>
+                <li class="list-group-item">
+                    <strong>Clusters:</strong> 3
+                </li>
+                <li class="list-group-item">
+                    <strong>Author:</strong> Victor Velazquez Cid
+                </li>
+            </ul>
+        </section>
+        <section class="container predict-section p-4 my-4 my-md-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Predict a rol</h2>
+                    <p class="mb-3">Please, write an age below and press the button</p>
+                    <div>
+                        <form id="form">
+                            <div class="input-group mb-3">
+                                <input class="form-control" id="age" type="number" aria-describedby="fetchButton" required>
+                                <button class="btn btn-primary" id="fetchButton">Predict</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6" style="display: grid; place-content: center;">
+                    <div class="container mx-auto my-auto">
+                        <h1 
+                            id="predictedRol" 
+                            style="text-transform: capitalize; font-size: 4rem;"
+                        ></h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="container text-center p-3">
+            <p>
+                Hecho por Victor Velazquez Cid.
+                <a href="https://github.com/vvelc">https://github.com/vvelc</a>
+            </p>
+        </div>
+    </footer>
+<script>
+    const button = document.getElementById('fetchButton');
+    const ageInput = document.getElementById('age');
+    const form = document.getElementById('form');
+    let rolElement = document.getElementById('predictedRol');
+    
+    function fetchRol(age) {
+        fetch(`/api?age=${age}`)
+        .then(res=> res.json())
+        .then(json => {
+            return rolElement.innerHTML = json.rol
+        })
+        .catch(e => {
+            form.reset()
+            return rolElement.innerHTML = "Invalid"
+        })
+    }
+    form.addEventListener('submit', function(e) {
+        e.preventDefault()
+        fetchRol(ageInput.value)
+    })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

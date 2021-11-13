@@ -1,0 +1,41 @@
+body {
+    background-color: #F8F8F8;
+}
+
+.predict-section,
+.details-section {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-group,
+.form-control {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header a {
+    color: inherit;
+}
+
+footer {
+    background-color: #444444;
+    color: white;
+}
+
+footer a {
+    color: white;
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 0;
+}
